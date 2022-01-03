@@ -1,0 +1,15 @@
+{
+    "messages": [
+        {
+            "to": "255716718040",
+            "status": {
+                "groupId": 1,
+                "groupName": "PENDING",
+                "id": 26,
+                "name": "PENDING_ACCEPTED",
+                "description": "Pending accepted , will be sent on scheduled time."
+            },
+            "smsCount": 1
+        }
+    ]
+}

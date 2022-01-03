@@ -1,0 +1,13 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Customer created successfully. Email is sent to your customer email address for confirmation.",
+    "result": {
+        "name": "Api Customer",
+        "username": "apicust",
+        "phone_number": "+255738234339",
+        "email": "apicust@customer.com",
+        "account_type": "Sub Customer (Reseller)",
+        "sms_price": "20.00 TSH"
+    }
+}

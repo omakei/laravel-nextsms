@@ -1,0 +1,57 @@
+{
+    "results": [
+        {
+            "messageId": "2808579298410163167",
+            "sentAt": "2020-02-08 12:28:51",
+            "doneAt": "2020-04-21 18:23:07",
+            "to": "255716718040",
+            "smsCount": 1,
+            "status": {
+                "groupId": 3,
+                "groupName": "DELIVERED",
+                "id": 5,
+                "name": "DELIVERED_TO_HANDSET",
+                "description": "Message delivered to handset"
+            },
+            "error": {
+                "groupId": 0,
+                "groupName": "OK",
+                "id": 0,
+                "name": "NO_ERROR",
+                "description": "No Error",
+                "permanent": false
+            }
+        },
+        {
+            "messageId": "28227686813403535606",
+            "sentAt": "2020-02-21 12:21:00",
+            "doneAt": "2020-04-18 18:23:07",
+            "to": "255716718040",
+            "smsCount": 1,
+            "status": null,
+            "error": null
+        },
+        {
+            "messageId": "28089492984101631440",
+            "sentAt": "2020-02-05 12:28:51",
+            "doneAt": "2020-04-18 18:23:07",
+            "to": "255716718040",
+            "smsCount": 1,
+            "status": {
+                "groupId": 3,
+                "groupName": "DELIVERED",
+                "id": 5,
+                "name": "DELIVERED_TO_HANDSET",
+                "description": "Message delivered to handset"
+            },
+            "error": {
+                "groupId": 0,
+                "groupName": "OK",
+                "id": 0,
+                "name": "NO_ERROR",
+                "description": "No Error",
+                "permanent": false
+            }
+        }
+    ]
+}

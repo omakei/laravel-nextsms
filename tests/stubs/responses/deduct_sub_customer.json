@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "status": 200,
+    "message": "Transaction completed successfully",
+    "result": {
+        "Customer": "example@email.com",
+        "Sms deducted": 2000,
+        "Your sms balance": 470000,
+        "Customer sms balance": 3000
+    }
+}

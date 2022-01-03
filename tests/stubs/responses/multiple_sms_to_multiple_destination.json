@@ -1,0 +1,26 @@
+{
+    "messages": [
+        {
+            "to": "255716718040",
+            "status": {
+                "groupId": 1,
+                "groupName": "PENDING",
+                "id": 7,
+                "name": "PENDING_ENROUTE",
+                "description": "Message sent to next instance"
+            },
+            "smsCount": 1
+        },
+        {
+            "to": "255655912841",
+            "status": {
+                "groupId": 1,
+                "groupName": "PENDING",
+                "id": 7,
+                "name": "PENDING_ENROUTE",
+                "description": "Message sent to next instance"
+            },
+            "smsCount": 1
+        }
+    ]
+}

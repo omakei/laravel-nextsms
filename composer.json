@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "omakei/laravel-nextsms",
+    "description": "A Laravel package to send SMS using NextSMS API ",
     "keywords": [
-        ":vendor_name",
+        "omakei",
         "laravel",
-        ":package_slug"
+        "laravel-nextsms"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/omakei/laravel-nextsms",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "omakei",
+            "email": "omakei96@gmail.com",
             "role": "Developer"
         }
     ],
@@ -26,6 +26,7 @@
         "orchestra/testbench": "^6.22",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.1",
+        "pestphp/pest-plugin-mock": "^1.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
@@ -34,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Omakei\\NextSMS\\": "src",
+            "Omakei\\NextSMS\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Omakei\\NextSMS\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -54,10 +55,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Omakei\\NextSMS\\NextSMSServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "NextSMS": "Omakei\\NextSMS\\Facades\\NextSMS"
             }
         }
     },
