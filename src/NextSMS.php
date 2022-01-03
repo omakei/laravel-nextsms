@@ -54,8 +54,8 @@ class NextSMS
 
         $dateUnit = explode('-', $sentUntil);
 
-        throw_if(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
-            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0])
+        throw_if(!(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
+            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0]))
             , InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
 
        return self::makeGetRequest(config('nextsms.url.sms.reports'),
@@ -82,9 +82,9 @@ class NextSMS
 
         $dateUnit = explode('-', $sentUntil);
 
-        throw_if(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
-            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0])
-            , InvalidPayload::invalidSingleSMSPayload());
+        throw_if(!(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
+            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0]))
+            , InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
 
 
        return self::makeGetRequest(config('nextsms.url.sms.reports'), [
@@ -112,8 +112,8 @@ class NextSMS
         int $sms_price): Response
     {
 
-        throw_if($account_type !='Sub Customer' ||
-            $account_type !='Sub Customer (Reseller)'
+        throw_if(!($account_type == 'Sub Customer' ||
+            $account_type == 'Sub Customer (Reseller)')
             , InvalidPayload::invalidAccountType());
 
        return self::makePostRequest(config('nextsms.url.sub_customer.create'), [
@@ -152,7 +152,6 @@ class NextSMS
     protected static function makeGetRequest(string $url, mixed $payload): Response
     {
        return Http::withHeaders(self::getHeaders())->get($url, $payload);
-
     }
 
     protected static function getHeaders(): array
@@ -201,8 +200,7 @@ class NextSMS
             throw_if(count(array_diff(['to','text'], array_keys($object))) != 0,
                 InvalidPayload::invalidSingleSMSPayload());
 
-            throw_if(!is_array(array_column($object, 'to')) ||
-                !is_string(array_column($object, 'to')),
+            throw_if(!(is_array($object['to']) || is_string($object['to'])),
                 InvalidPayload::invalidPayloadArrayKeyType('"to" key of type array or "to" key of type string'));
 
 

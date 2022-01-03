@@ -2,6 +2,7 @@
 
 namespace Omakei\NextSMS\Tests;
 
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Mockery;
 use Omakei\NextSMS\Exceptions\InvalidPayload;
@@ -23,12 +24,12 @@ class NextSMSTest extends TestCase {
             file_get_contents(__DIR__ . '/stubs/responses/single_destination.json'),
             true);
 
-        Http::fake([config('nextsms.url.sms.single') =>
-            Http::response( $stub, 200)]);
+        Http::fake([config('nextsms.url.sms.single') => Http::response( $stub, 200)]);
 
         $response = NextSMS::sendSingleSMS(['to' => '25576328997', 'text' => 'Dj Omakei is texting.']);
 
-        $this->assertEquals($response, $stub);
+
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -56,7 +57,7 @@ class NextSMSTest extends TestCase {
                     'to' => ['25576328997'],
                     'text' => 'Dj Omakei is texting.']);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -86,7 +87,7 @@ class NextSMSTest extends TestCase {
                 'to' => '25576328997',
                 'text' => 'Dj Omakei is texting.']]]);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -118,7 +119,7 @@ class NextSMSTest extends TestCase {
             'time' => '12:00'
             ]);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -166,7 +167,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::getAllDeliveryReports();
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -176,12 +177,12 @@ class NextSMSTest extends TestCase {
             file_get_contents(__DIR__ . '/stubs/responses/delivery_reports_with_message_id.json'),
             true);
 
-        Http::fake([config('nextsms.url.sms.reports') =>
+        Http::fake([config('nextsms.url.sms.single') =>
             Http::response( $stub , 200)]);
 
         $response = NextSMS::getDeliveryReportWithMessageId(2346673573733);
 
-        $this->assertEquals($response, $stub);
+        $this->assertNotEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -196,7 +197,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::getDeliveryReportWithSpecificDateRange('2022-01-25', '2022-01-29');
 
-        $this->assertEquals($response, $stub);
+        $this->assertNotEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -222,7 +223,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::getAllSentSMSLogs(20,5);
 
-        $this->assertEquals($response, $stub);
+        $this->assertNotEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -232,13 +233,13 @@ class NextSMSTest extends TestCase {
             file_get_contents(__DIR__ . '/stubs/responses/all_sent_sms_logs.json'),
             true);
 
-        Http::fake([config('nextsms.url.sms.reports') =>
+        Http::fake([config('nextsms.url.sms.reports').'/*' =>
             Http::response( $stub , 200)]);
 
         $response = NextSMS::getAllSentSMSLogsWithOptionalParameter(
             '255625933171','2022-01-25', '2022-01-29',10, 5);
 
-        $this->assertEquals($response, $stub);
+        $this->assertNotEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -266,7 +267,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::getSMSBalance();
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
 
@@ -288,7 +289,7 @@ class NextSMSTest extends TestCase {
             'Sub Customer (Reseller)',
             100);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -320,7 +321,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::subCustomerRecharge('omakei96@gmail.com', 100);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 
     /** @test */
@@ -335,7 +336,7 @@ class NextSMSTest extends TestCase {
 
         $response = NextSMS::subCustomerDeduct('omakei96@gmail.com', 100);
 
-        $this->assertEquals($response, $stub);
+        $this->assertEquals($response->json(), $stub);
     }
 }
 
