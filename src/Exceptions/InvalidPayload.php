@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Omakei\NextSMS\Exceptions;
-
 
 use Exception;
 
@@ -32,5 +30,4 @@ final class InvalidPayload extends Exception
     {
         return new InvalidPayload('The account type must be Sub Customer or Sub Customer (Reseller).');
     }
-
 }
