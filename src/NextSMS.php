@@ -84,8 +84,7 @@ class NextSMS
         string $sentUntil,
         int $limit,
         int $offset
-    ): Response
-    {
+    ): Response {
         throw_if(count(explode('-', $sentSince)) != 3 || count(explode('-', $sentUntil)) != 3, InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
 
         $dateSince = explode('-', $sentSince);
@@ -119,8 +118,7 @@ class NextSMS
         string $phone_number,
         string $account_type,
         int $sms_price
-    ): Response
-    {
+    ): Response {
         throw_if($account_type != 'Sub Customer' ||
             $account_type != 'Sub Customer (Reseller)', InvalidPayload::invalidAccountType());
 
