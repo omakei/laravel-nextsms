@@ -1,7 +1,8 @@
 
 <p align="center">
-    <img src="/art/nextsms-logo.png" width="1352" title="NextSMS Logo" alt="NextSMS Logo">
+    <img src="/art/nextsms-logo.png" width="300" title="NextSMS Logo" alt="NextSMS Logo">
 </p>
+
 # Laravel NextSMS
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/omakei/laravel-nextsms.svg?style=flat-square)](https://packagist.org/packages/omakei/laravel-nextsms)
