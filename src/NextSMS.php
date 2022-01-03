@@ -179,7 +179,7 @@ class NextSMS
             InvalidPayload::invalidSingleSMSPayload()
         );
 
-        return array_merge(['from' => config('textsms.sender_id'), $payload]);
+        return (['from' => config('nextsms.sender_id')] + $payload);
     }
 
     protected static function getSingleSMSToMultipleDestinationPayload(array $payload): array
@@ -191,7 +191,7 @@ class NextSMS
 
         throw_if(! is_array($payload['to']), InvalidPayload::invalidMultipleSMSPayload());
 
-        return array_merge(['from' => config('textsms.sender_id'), $payload]);
+        return (['from' => config('nextsms.sender_id')] + $payload);
     }
 
     protected static function getMultipleSMSToMultipleDestinationPayload(array $payload): array
@@ -220,7 +220,7 @@ class NextSMS
                 InvalidPayload::invalidPayloadArrayKeyType('"to" key of type array or "to" key of type string'));
 
 
-            $payloads['messages'][$index] = array_merge(['from' => config('textsms.sender_id'), $object]);
+            $payloads['messages'][$index] = (['from' => config('nextsms.sender_id')] + $object);
 
             $index++;
         }
@@ -257,6 +257,6 @@ class NextSMS
             InvalidPayload::invalidPayloadArrayKeyType('"time" key of format "HH:MM"')
         );
 
-        return array_merge(['from' => config('textsms.sender_id'), $payload]);
+        return (['from' => config('nextsms.sender_id')] + $payload);
     }
 }
