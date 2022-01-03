@@ -60,9 +60,8 @@ class NextSMS
 
         $dateUnit = explode('-', $sentUntil);
 
-        throw_if(!(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
-            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0]))
-            , InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
+        throw_if(! (checkdate($dateSince[1], $dateSince[2], $dateSince[0]) ||
+            checkdate($dateUnit[1], $dateUnit[2], $dateUnit[0])), InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
 
         return self::makeGetRequest(
             config('nextsms.url.sms.reports'),
@@ -92,9 +91,8 @@ class NextSMS
 
         $dateUnit = explode('-', $sentUntil);
 
-        throw_if(!(checkdate($dateSince[1], $dateSince[2],$dateSince[0]) ||
-            checkdate($dateUnit[1], $dateUnit[2],$dateUnit[0]))
-            , InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
+        throw_if(! (checkdate($dateSince[1], $dateSince[2], $dateSince[0]) ||
+            checkdate($dateUnit[1], $dateUnit[2], $dateUnit[0])), InvalidPayload::invalidPayloadArrayKeyType('"date" key of format "YYYY-MM-DD"'));
 
 
         return self::makeGetRequest(config('nextsms.url.sms.reports'), [
@@ -119,21 +117,20 @@ class NextSMS
         string $email,
         string $phone_number,
         string $account_type,
-        int $sms_price): Response
+        int $sms_price
+    ): Response
     {
+        throw_if(! ($account_type == 'Sub Customer' ||
+            $account_type == 'Sub Customer (Reseller)'), InvalidPayload::invalidAccountType());
 
-        throw_if(!($account_type == 'Sub Customer' ||
-            $account_type == 'Sub Customer (Reseller)')
-            , InvalidPayload::invalidAccountType());
-
-       return self::makePostRequest(config('nextsms.url.sub_customer.create'), [
-            'first_name'=> $first_name,
-            'last_name'=> $last_name,
-            'username'=> $username,
-            'email'=> $email,
-            'phone_number'=> $phone_number,
-            'account_type'=> $account_type,
-            'sms_price'=> $sms_price
+        return self::makePostRequest(config('nextsms.url.sub_customer.create'), [
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'username' => $username,
+            'email' => $email,
+            'phone_number' => $phone_number,
+            'account_type' => $account_type,
+            'sms_price' => $sms_price,
         ]);
     }
 
@@ -160,7 +157,7 @@ class NextSMS
 
     protected static function makeGetRequest(string $url, mixed $payload): Response
     {
-       return Http::withHeaders(self::getHeaders())->get($url, $payload);
+        return Http::withHeaders(self::getHeaders())->get($url, $payload);
     }
 
     protected static function getHeaders(): array
@@ -216,8 +213,10 @@ class NextSMS
                 InvalidPayload::invalidSingleSMSPayload()
             );
 
-            throw_if(!(is_array($object['to']) || is_string($object['to'])),
-                InvalidPayload::invalidPayloadArrayKeyType('"to" key of type array or "to" key of type string'));
+            throw_if(
+                ! (is_array($object['to']) || is_string($object['to'])),
+                InvalidPayload::invalidPayloadArrayKeyType('"to" key of type array or "to" key of type string')
+            );
 
 
             $payloads['messages'][$index] = array_merge(['from' => config('textsms.sender_id'), $object]);

@@ -2,7 +2,6 @@
 
 namespace Omakei\NextSMS\Tests;
 
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Mockery;
 use Omakei\NextSMS\Exceptions\InvalidPayload;
@@ -25,7 +24,7 @@ class NextSMSTest extends TestCase
             true
         );
 
-        Http::fake([config('nextsms.url.sms.single') => Http::response( $stub, 200)]);
+        Http::fake([config('nextsms.url.sms.single') => Http::response($stub, 200)]);
 
         $response = NextSMS::sendSingleSMS(['to' => '25576328997', 'text' => 'Dj Omakei is texting.']);
 
@@ -178,7 +177,7 @@ class NextSMSTest extends TestCase
         );
 
         Http::fake([config('nextsms.url.sms.single') =>
-            Http::response( $stub , 200)]);
+            Http::response($stub, 200), ]);
 
         $response = NextSMS::getDeliveryReportWithMessageId(2346673573733);
 
@@ -236,7 +235,7 @@ class NextSMSTest extends TestCase
         );
 
         Http::fake([config('nextsms.url.sms.reports').'/*' =>
-            Http::response( $stub , 200)]);
+            Http::response($stub, 200), ]);
 
         $response = NextSMS::getAllSentSMSLogsWithOptionalParameter(
             '255625933171',
