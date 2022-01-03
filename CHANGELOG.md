@@ -2,6 +2,6 @@
 
 All notable changes to `laravel-nextsms` will be documented in this file.
 
-## 1.0.0 - 202X-XX-XX
+## Release v1.0.0 - 2022-01-03
 
-- initial release
+- Initial Release
