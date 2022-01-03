@@ -2,9 +2,9 @@
 
 namespace Omakei\NextSMS;
 
+use Omakei\NextSMS\Commands\NextSMSCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Omakei\NextSMS\Commands\NextSMSCommand;
 
 class NextSMSServiceProvider extends PackageServiceProvider
 {
