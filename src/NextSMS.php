@@ -118,8 +118,7 @@ class NextSMS
         string $phone_number,
         string $account_type,
         int $sms_price
-    ): Response
-    {
+    ): Response {
         throw_if(! ($account_type == 'Sub Customer' ||
             $account_type == 'Sub Customer (Reseller)'), InvalidPayload::invalidAccountType());
 
