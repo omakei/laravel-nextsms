@@ -63,7 +63,10 @@ return [
 
 ### Send SMS
 
+#### NB: Telephone Number Must Start with Valid Country Code. Example: 255625933171
+
 Sending single sms to single destination:
+
 
 ```php
 
