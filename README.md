@@ -65,6 +65,9 @@ return [
 
 Sending single sms to single destination:
 
+# Note: Make sure telephone number starts with country code. example: 255625933171
+
+
 ```php
 
 use Omakei\NextSMS\NextSMS;
