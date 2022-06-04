@@ -172,7 +172,6 @@ class NextSMS
         self::checkRejectedRequest($response);
 
         return $response;
-
     }
 
     protected static function getHeaders(): array
@@ -280,13 +279,11 @@ class NextSMS
      */
     protected static function checkRejectedRequest(\GuzzleHttp\Promise\PromiseInterface|Response $response): void
     {
-        if (!empty($response->json('messages')) && $response->json('messages')[0]['status']['groupId'] === 5) {
-
+        if (! empty($response->json('messages')) && $response->json('messages')[0]['status']['groupId'] === 5) {
             throw InvalidPayload::serverRejectYourRequest($response->json('messages')[0]['status']['description']);
         }
 
-        if (!empty($response->json('results')) && $response->json('results')[0]['status']['groupId'] === 5) {
-
+        if (! empty($response->json('results')) && $response->json('results')[0]['status']['groupId'] === 5) {
             throw InvalidPayload::serverRejectYourRequest($response->json('messages')[0]['status']['description']);
         }
     }
