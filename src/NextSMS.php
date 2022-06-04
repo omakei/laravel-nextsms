@@ -149,14 +149,30 @@ class NextSMS
         ]);
     }
 
+    /**
+     * @throws InvalidPayload
+     */
     protected static function makePostRequest(string $url, mixed $payload): Response
     {
-        return Http::withHeaders(self::getHeaders())->post($url, $payload);
+        $response = Http::withHeaders(self::getHeaders())->post($url, $payload);
+
+        self::checkRejectedRequest($response);
+
+        return $response;
     }
 
+    /**
+     *
+     * @throws InvalidPayload
+     */
     protected static function makeGetRequest(string $url, mixed $payload): Response
     {
-        return Http::withHeaders(self::getHeaders())->get($url, $payload);
+        $response = Http::withHeaders(self::getHeaders())->get($url, $payload);
+
+        self::checkRejectedRequest($response);
+
+        return $response;
+
     }
 
     protected static function getHeaders(): array
@@ -256,5 +272,22 @@ class NextSMS
         );
 
         return (['from' => config('nextsms.sender_id')] + $payload);
+    }
+
+    /**
+     * @param \GuzzleHttp\Promise\PromiseInterface|Response $response
+     * @throws InvalidPayload
+     */
+    protected static function checkRejectedRequest(\GuzzleHttp\Promise\PromiseInterface|Response $response): void
+    {
+        if (!empty($response->json('messages')) && $response->json('messages')[0]['status']['groupId'] === 5) {
+
+            throw InvalidPayload::serverRejectYourRequest($response->json('messages')[0]['status']['description']);
+        }
+
+        if (!empty($response->json('results')) && $response->json('results')[0]['status']['groupId'] === 5) {
+
+            throw InvalidPayload::serverRejectYourRequest($response->json('messages')[0]['status']['description']);
+        }
     }
 }

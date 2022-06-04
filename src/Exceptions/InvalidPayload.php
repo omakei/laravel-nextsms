@@ -30,4 +30,10 @@ final class InvalidPayload extends Exception
     {
         return new InvalidPayload('The account type must be Sub Customer or Sub Customer (Reseller).');
     }
+
+    public static function serverRejectYourRequest(string $description): InvalidPayload
+    {
+        return new InvalidPayload("Message has been received,
+        but has either been rejected by our system, or the operator has reverted Rejected as final status. Here is the description {$description}");
+    }
 }
