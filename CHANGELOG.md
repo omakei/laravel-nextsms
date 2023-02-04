@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-nextsms` will be documented in this file.
 
+## Release v2.0.0 - 2023-02-04
+
+- Add Laravel 9 compatibility
+
 ## Release v1.1.0 - 2022-06-04
 
 ### What's Changed
